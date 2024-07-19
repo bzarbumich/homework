@@ -1,0 +1,171 @@
+#PART 2
+install.packages("dplyr")
+
+library(dplyr)
+
+world_cup_matches <- read.csv("C:/Users/Brandon/Downloads/WorldCupMatches.csv")
+
+dim(world_cup_matches)
+
+summary(world_cup_matches)
+
+length(unique(world_cup_matches$Location))
+
+mean(world_cup_matches$Attendance, na.rm = TRUE)
+
+aggregate(world_cup_matches$Home.Team.Goals, by = list(world_cup_matches$Home.Team.Name), FUN = sum)
+
+world_cup_matches %>% group_by(Year) %>% summarise(avg_attendance = mean(Attendance, na.rm = TRUE))
+> library(dplyr)
+> 
+> world_cup_matches <- read.csv("C:/Users/Brandon/Downloads/WorldCupMatches.csv")
+> 
+> dim(world_cup_matches)
+[1] 852  20
+> 
+> summary(world_cup_matches)
+      Year        Datetime            Stage             Stadium              City           Home.Team.Name    
+ Min.   :1930   Length:852         Length:852         Length:852         Length:852         Length:852        
+ 1st Qu.:1970   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median :1990   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :1985                                                                                                 
+ 3rd Qu.:2002                                                                                                 
+ Max.   :2014                                                                                                 
+                                                                                                              
+ Home.Team.Goals  Away.Team.Goals Away.Team.Name     Win.conditions       Attendance     Half.time.Home.Goals
+ Min.   : 0.000   Min.   :0.000   Length:852         Length:852         Min.   :  2000   Min.   :0.0000      
+ 1st Qu.: 1.000   1st Qu.:0.000   Class :character   Class :character   1st Qu.: 30000   1st Qu.:0.0000      
+ Median : 2.000   Median :1.000   Mode  :character   Mode  :character   Median : 41580   Median :0.0000      
+ Mean   : 1.811   Mean   :1.022                                         Mean   : 45165   Mean   :0.7089      
+ 3rd Qu.: 3.000   3rd Qu.:2.000                                         3rd Qu.: 61375   3rd Qu.:1.0000      
+ Max.   :10.000   Max.   :7.000                                         Max.   :173850   Max.   :6.0000      
+                                                                        NA's   :2                            
+ Half.time.Away.Goals   Referee          Assistant.1        Assistant.2           RoundID            MatchID         
+ Min.   :0.0000       Length:852         Length:852         Length:852         Min.   :     201   Min.   :       25  
+ 1st Qu.:0.0000       Class :character   Class :character   Class :character   1st Qu.:     262   1st Qu.:     1189  
+ Median :0.0000       Mode  :character   Mode  :character   Mode  :character   Median :     337   Median :     2191  
+ Mean   :0.4284                                                                Mean   :10661773   Mean   : 61346868  
+ 3rd Qu.:1.0000                                                                3rd Qu.:  249722   3rd Qu.: 43950059  
+ Max.   :5.0000                                                                Max.   :97410600   Max.   :300186515  
+                                                                                                                     
+ Home.Team.Initials Away.Team.Initials
+ Length:852         Length:852        
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      
+                                      
+> 
+> length(unique(world_cup_matches$Location))
+[1] 0
+> 
+> mean(world_cup_matches$Attendance, na.rm = TRUE)
+[1] 45164.8
+> 
+> aggregate(world_cup_matches$Home.Team.Goals, by = list(world_cup_matches$Home.Team.Name), FUN = sum)
+                      Group.1   x
+1                     Algeria   5
+2                      Angola   0
+3                   Argentina 111
+4                   Australia   7
+5                     Austria  31
+6                     Belgium  27
+7                     Bolivia   1
+8                      Brazil 180
+9                    Bulgaria  11
+10                   Cameroon  11
+11                     Canada   0
+12                      Chile  25
+13                   China PR   0
+14                   Colombia  11
+15                 Costa Rica   7
+16                    Croatia   3
+17              C�te d'Ivoire   5
+18                       Cuba   5
+19             Czech Republic   0
+20             Czechoslovakia  27
+21                    Denmark  13
+22                    Ecuador   4
+23                    England  54
+24                     France  68
+25                  German DR   3
+26                    Germany  69
+27                 Germany FR  99
+28                      Ghana   4
+29                     Greece   4
+30                      Haiti   0
+31                   Honduras   2
+32                    Hungary  73
+33                    IR Iran   0
+34                       Iran   1
+35                       Iraq   1
+36                      Italy  99
+37                    Jamaica   1
+38                      Japan   7
+39                  Korea DPR   2
+40             Korea Republic  18
+41                     Mexico  22
+42                    Morocco   3
+43                Netherlands  51
+44                New Zealand   1
+45                    Nigeria  12
+46           Northern Ireland   5
+47                     Norway   1
+48                   Paraguay  14
+49                       Peru  13
+50                     Poland  27
+51                   Portugal  36
+52 rn">Bosnia and Herzegovina   3
+53    rn">Republic of Ireland   2
+54  rn">Serbia and Montenegro   0
+55    rn">Trinidad and Tobago   0
+56   rn">United Arab Emirates   0
+57                    Romania  15
+58                     Russia   9
+59               Saudi Arabia   3
+60                   Scotland  11
+61                    Senegal   3
+62                     Serbia   0
+63                   Slovakia   3
+64                   Slovenia   3
+65               South Africa   7
+66               Soviet Union  43
+67                      Spain  50
+68                     Sweden  53
+69                Switzerland  22
+70                       Togo   0
+71                    Tunisia   6
+72                     Turkey  10
+73                    Ukraine   1
+74                    Uruguay  62
+75                        USA  19
+76                      Wales   2
+77                 Yugoslavia  42
+78                      Zaire   0
+> 
+> world_cup_matches %>% group_by(Year) %>% summarise(avg_attendance = mean(Attendance, na.rm = TRUE))
+# A tibble: 20 × 2
+    Year avg_attendance
+   <int>          <dbl>
+ 1  1930         32808.
+ 2  1934         21353.
+ 3  1938         20872.
+ 4  1950         47511.
+ 5  1954         29562.
+ 6  1958         23423.
+ 7  1962         27912.
+ 8  1966         48848.
+ 9  1970         50124.
+10  1974         49099.
+11  1978         40679.
+12  1982         40572.
+13  1986         46039.
+14  1990         48389.
+15  1994         68991.
+16  1998         43517.
+17  2002         42269.
+18  2006         52491.
+19  2010         49670.
+20  2014         55375.
+>
